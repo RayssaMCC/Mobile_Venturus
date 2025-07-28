@@ -145,7 +145,7 @@ class _MainAppState extends State<MainApp> {
           onPressed: () {
             setState(() {
               _randomNumberList.clear();
-              _text = '???';
+              _text = '????';
               _alert = '';
             });
           },
