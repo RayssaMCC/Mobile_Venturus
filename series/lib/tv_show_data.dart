@@ -4,14 +4,14 @@ List<TvShow> favTvShowList = [
   TvShow(
     title: 'Breaking Bad',
     stream: 'Netflix',
-    rating: 10,
+    rating: 9,
     summary:
         'Um professor de química do ensino médio começa a fabricar metanfetamina para garantir o futuro de sua família.',
   ),
   TvShow(
     title: 'Stranger Things',
     stream: 'Netflix',
-    rating: 9,
+    rating: 10,
     summary:
         'Um grupo de crianças enfrenta forças sobrenaturais e experimentos secretos em uma pequena cidade dos anos 80.',
   ),
