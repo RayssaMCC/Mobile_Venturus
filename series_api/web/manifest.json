@@ -1,6 +1,6 @@
 {
-    "name": "series_api",
-    "short_name": "series_api",
+    "name": "app3_series_api",
+    "short_name": "app3_series_api",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
