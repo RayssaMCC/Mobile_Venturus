@@ -1,4 +1,5 @@
 import 'package:series_api/base_screen.dart';
+import 'package:series_api/fav_tv_show_screen.dart';
 import 'package:series_api/my_theme_model.dart';
 import 'package:series_api/tv_show_model.dart';
 import 'package:series_api/tv_show_screen.dart';
@@ -20,12 +21,19 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/search',
+  initialLocation: '/',
   routes: [
     ShellRoute(
       builder: (context, state, child) => BaseScreen(child: child),
       routes: [
-        GoRoute(path: '/', builder: (context, state) => TvShowScreen()),
+        GoRoute(path: '/', builder: (context, state) => FavTvShowScreen()),
+        GoRoute(
+          path: '/tvshow/:id',
+          builder: (context, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return TvShowScreen(id: id);
+          },
+        ),
         GoRoute(
           path: '/search',
           builder: (context, state) => TvShowSearchScreen(),
