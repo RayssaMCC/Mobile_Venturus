@@ -15,6 +15,8 @@ class RecipesViewModel extends GetxController{
   bool get isLoading => _isLoading.value;
   String? get errorMessage => _errorMessage.value;
 
+  get recipe => null;
+
   Future<void> getRecipes() async {
     try {
       _isLoading.value = true;
@@ -26,5 +28,4 @@ class RecipesViewModel extends GetxController{
       _isLoading.value = false;
     }
   }
-
 }

@@ -10,4 +10,19 @@ class RecipeService {
     .select()
     .order('id', ascending: true);
   }
+
+  Future<Map<String, dynamic>?> fetchRecipeById(String id) async {
+    return await _supabaseClient
+        .from('recipes')
+        .select()
+        .eq('id', id)
+        .single();
+  }
+
+  Future<List<Map<String, dynamic>>> fetchFavRecipes(String userId) async {
+    return await _supabaseClient
+        .from('favorites')
+        .select('recipes(*)')
+        .eq('user_id', userId);
+  }
 }
