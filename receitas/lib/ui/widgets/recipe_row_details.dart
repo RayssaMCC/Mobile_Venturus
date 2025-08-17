@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:receitas/data/models/recipe.dart';
+import 'package:flutter/material.dart';
 
 class RecipeRowDetails extends StatelessWidget {
   const RecipeRowDetails({

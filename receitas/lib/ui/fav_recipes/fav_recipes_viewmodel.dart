@@ -3,28 +3,29 @@ import 'package:receitas/data/repositories/recipe_repository.dart';
 import 'package:receitas/di/service_locator.dart';
 import 'package:get/get.dart';
 
-class RecipesViewModel extends GetxController{
+class FavRecipesViewModel extends GetxController {
   final _repository = getIt<RecipeRepository>();
 
-  final RxList<Recipe> _recipes = <Recipe>[].obs;
+  final RxList<Recipe> _favRecipes = <Recipe>[].obs;
   final RxBool _isLoading = false.obs;
   final RxString _errorMessage = ''.obs;
 
   // Getters
-  List<Recipe> get recipes => _recipes;
+  List<Recipe> get favRecipes => _favRecipes;
   bool get isLoading => _isLoading.value;
   String? get errorMessage => _errorMessage.value;
 
-  Future<void> getRecipes() async {
+  Future<void> getFavRecipes() async {
     try {
       _isLoading.value = true;
       _errorMessage.value = '';
-      _recipes.value = await _repository.getRecipes();
+      // TODO: Como obter o userId do usuário atual?
+      final userId = '790e503c-30de-438c-9998-d7183cea4532';
+      _favRecipes.value = await _repository.getFavRecipes(userId);
     } catch (e) {
       _errorMessage.value = 'Falha ao buscar receitas: ${e.toString()}';
     } finally {
       _isLoading.value = false;
     }
   }
-
 }

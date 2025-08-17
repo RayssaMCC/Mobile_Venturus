@@ -1,7 +1,7 @@
 import 'package:receitas/data/models/recipe.dart';
+import 'package:receitas/ui/widgets/recipe_row_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:receitas/ui/widgets/recipe_row_details.dart';
 
 class RecipeCard extends StatelessWidget {
   const RecipeCard({super.key, required this.recipe});
@@ -61,4 +61,3 @@ class RecipeCard extends StatelessWidget {
     );
   }
 }
-

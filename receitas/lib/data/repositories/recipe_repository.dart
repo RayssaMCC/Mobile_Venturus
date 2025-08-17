@@ -20,16 +20,19 @@ class RecipeRepository {
   }
 
   Future<List<Recipe>> getFavRecipes(String userId) async {
-    try {
-      final rawData = await _service.fetchFavRecipes(userId);
-      return rawData
-        .where((data) => data['recipes'] != null)
-        .map((data) => Recipe.fromJson(data['recipes'] as Map<String, dynamic>))
-        .toList();
+    final rawData = await _service.fetchFavRecipes(userId);
+    return rawData
+      .where((data) => data['recipes'] != null)
+      .map((data) => Recipe.fromJson(data['recipes'] as Map<String, dynamic>))
+      .toList();
+  }
 
-    } catch (e) {
-      throw Exception('Falha ao carregar receitas favoritas: ${e.toString()}');
-    }
+  Future<void> insertFavRecipe(String recipeId, String userId) async {
+    await _service.insertFavRecipe(recipeId, userId);
+  }
+
+  Future<void> deleteFavRecipe(String recipeId, String userId) async {
+    await _service.deleteFavRecipe(recipeId, userId);
   }
 
 }
