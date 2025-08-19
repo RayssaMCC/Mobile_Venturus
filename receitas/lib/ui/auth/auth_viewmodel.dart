@@ -78,14 +78,13 @@ class AuthViewModel extends GetxController {
   Future<void> submit() async {
     final valid = formKey.currentState?.validate() ?? false;
     if (!valid) return;
-
-    // TODO: Implementar a lógica de autenticação real aqui
     _isSubmitting.value = true;
     if (isLoginMode) {
       await login();
     } else {
       await register();
     }
+    _isSubmitting.value = false;
   }
 
   Future<void> login() async {

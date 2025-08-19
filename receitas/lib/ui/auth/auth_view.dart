@@ -41,7 +41,8 @@ class _AuthViewState extends State<AuthView> {
                       _buildAvatarUrlField(),
                     ],
                     const SizedBox(height: 32),
-                    _buildSubmitButton(context),
+                    _buildErrorMessage(),
+                    const SizedBox(height: 32),
                     _buildSubmitButton(),
                     const SizedBox(height: 32),
                     _buildToggleModeButton(),
@@ -171,52 +172,72 @@ class _AuthViewState extends State<AuthView> {
     );
   }
 
-    Widget _buildSubmitButton(BuildContext context) {
-    Widget _buildSubmitButton() {
-      return SizedBox(
-        height: 50,
-        child: ElevatedButton(
-          onPressed: viewModel.submit,
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+  Widget _buildErrorMessage() {
+    return Obx(
+      () => Visibility(
+        visible: viewModel.errorMessage.isNotEmpty,
+        child: Text(
+          viewModel.errorMessage,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.error,
+            fontSize: 16,
           ),
-          child: viewModel.isSubmitting
-              ? const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-              : Text(
-                  viewModel.isLoginMode ? 'ENTRAR' : 'CADASTRAR',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+          textAlign: TextAlign.center,
         ),
-      );
-    }
+      ),
+    );
+  }
 
-    Widget _buildToggleModeButton() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            viewModel.isLoginMode ? 'Não tem uma conta? ' : 'Já tem uma conta? ',
+  Widget _buildSubmitButton() {
+    return SizedBox(
+      height: 50,
+      child: ElevatedButton(
+        onPressed: viewModel.submit,
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          TextButton(
-            onPressed: viewModel.isSubmitting ? null : viewModel.toggleMode,
-            child: Text(
-              viewModel.isLoginMode ? 'Cadastre-se' : 'Entre aqui',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        ),
+        child: viewModel.isSubmitting
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              )
+            : Text(
+                viewModel.isLoginMode ? 'ENTRAR' : 'CADASTRAR',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+      ),
+    );
+  }
+
+  Widget _buildToggleModeButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          viewModel.isLoginMode ? 'Não tem uma conta? ' : 'Já tem uma conta? ',
+        ),
+        TextButton(
+          onPressed: viewModel.isSubmitting ? null : viewModel.toggleMode,
+          child: Text(
+            viewModel.isLoginMode ? 'Cadastre-se' : 'Entre aqui',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      );
-    }
+        ),
+      ],
+    );
   }
 }
